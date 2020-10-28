@@ -1,11 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <todoHeader />
+  <todoComponent />
 </template>
 
 <script>
+import todoHeader from "@/components/TodoHeader";
+import todoComponent from "@/components/TodoComponent";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    todoHeader,
+    todoComponent,
+  },
 };
 </script>
 
