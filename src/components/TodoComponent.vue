@@ -18,8 +18,18 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12" v-for="todo in todos" :key="todo.id">
-          {{ todo.content }}
+        <div class="col-md-2">
+          <ul>
+            <li v-for="todo in todos" :key="todo.id">
+              <h2
+                @click="toggleDone(todo)"
+                :class="{ done: todo.done }"
+                class="todo"
+              >
+                {{ todo.content }}
+              </h2>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -44,8 +54,14 @@ export default {
       });
       newTodo.value = "";
     }
+
+    function toggleDone(todo) {
+      todo.done = !todo.done;
+    }
+
     // makes it so you have access in the template
     return {
+      toggleDone,
       todos,
       newTodo,
       createTodo,
@@ -55,4 +71,10 @@ export default {
 </script>
 
 <style>
+.done {
+  text-decoration: line-through;
+}
+.todo {
+  cursor: pointer;
+}
 </style>
