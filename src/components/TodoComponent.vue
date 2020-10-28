@@ -18,16 +18,24 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <ul>
-            <li v-for="todo in todos" :key="todo.id">
-              <h2
-                @click="toggleDone(todo)"
-                :class="{ done: todo.done }"
-                class="todo"
-              >
-                {{ todo.content }}
-              </h2>
+            <li v-for="(todo, index) in todos" :key="todo.id">
+              <div class="d-flex justify-content-between">
+                <h4
+                  @click="toggleDone(todo)"
+                  :class="{ done: todo.done }"
+                  class="todo"
+                >
+                  {{ todo.content }}
+                </h4>
+                <button
+                  class="btn btn-danger btn-sm"
+                  @click="removeTodo(index)"
+                >
+                  Delete
+                </button>
+              </div>
             </li>
           </ul>
         </div>
@@ -59,8 +67,13 @@ export default {
       todo.done = !todo.done;
     }
 
+    function removeTodo(index) {
+      todos.value.splice(index, 1);
+    }
+
     // makes it so you have access in the template
     return {
+      removeTodo,
       toggleDone,
       todos,
       newTodo,
